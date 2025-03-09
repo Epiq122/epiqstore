@@ -46,7 +46,7 @@ export const config = {
             };
           }
         }
-        // if user not found or password is incorrect return null
+        // if user not found or password is incorrect return to null
         return null;
       },
     }),
