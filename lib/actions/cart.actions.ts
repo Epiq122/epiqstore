@@ -6,7 +6,7 @@ import { formatErrors } from '@/lib/utils';
 import { auth } from '@/auth';
 import { prisma } from '@/db/prisma';
 import { cartItemSchema } from '../validators';
-
+import { convertToCartItems } from '../utils';
 export async function addItemToCart(data: CartItem) {
   // check for cart cookie
   const sessionCartId = (await cookies()).get('sessionCartId')?.value;
