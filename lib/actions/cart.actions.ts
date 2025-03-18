@@ -2,11 +2,11 @@
 
 import { cookies } from 'next/headers';
 import { CartItem } from '@/types';
-import { formatErrors } from '@/lib/utils';
+import { formatErrors, convertToPlainObject } from '@/lib/utils';
 import { auth } from '@/auth';
 import { prisma } from '@/db/prisma';
 import { cartItemSchema } from '../validators';
-import { convertToCartItems } from '../utils';
+
 export async function addItemToCart(data: CartItem) {
   // check for cart cookie
   const sessionCartId = (await cookies()).get('sessionCartId')?.value;
@@ -63,7 +63,7 @@ export async function getMyCart() {
   if (!cart) return undefined;
 
   // convert decimals and return
-  return convertToCartItems({
+  return convertToPlainObject({
     ...cart,
     items: cart.items as CartItem[],
     itemsPrice: cart.itemsPrice.toString(),
